@@ -1,0 +1,11 @@
+<html>
+<head>
+<title>문서의 제목</title> 
+</head>
+<body>
+<!-- 주석의 영역 -->
+br은 줄 띄우기다 endl 같은거지 <br>
+<font color = "red" size = '10'>색깔 예시</font>를 들었다.<br>
+</body>
+</html>
+ 

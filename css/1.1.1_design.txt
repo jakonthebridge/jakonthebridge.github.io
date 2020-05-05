@@ -1,0 +1,7 @@
+<html>
+<head> 디자인 - 속성에 대해서 </head>
+<body>
+bgcolor="white" bgcolor
+text="blue"
+</body>
+</html>
