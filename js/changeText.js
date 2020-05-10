@@ -1,0 +1,4 @@
+function fuckyou
+{
+    alert('hhhhhhh');
+}

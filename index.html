@@ -18,6 +18,16 @@ alink  = "blue"
 <p>link  - 방문 내역이 없는 링크 걸린 글자의 색 지정,
 vlink - 방문 내역이 있는 링크 걸린 글자의 색 지정,
 alink - 링크걸린 글자를 클릭하는 순간의 색 지정</p><br>
+<p onclick="changeText(this)">문자열 바뀌기 전</p>
+<script>
+
+    function changeText(element) {
+    
+        element.innerHTML = "문자열의 내용이 바뀌었습니다!";
+    
+    }
+</script>
+<script src="js/changeText.js"></script>
 </body>
 </html>
  
