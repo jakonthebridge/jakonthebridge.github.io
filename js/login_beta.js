@@ -2,8 +2,7 @@ var write = prompt("아이디를 입력하세요");
 function WinClose()
 {
 
-    window.open('https://jakonthebridge.github.io/','_self').close();     
- 
+    window.open('../index.html','_self').close();     
 }
 if(write=="jaeone01")
 {
@@ -14,14 +13,16 @@ if(write=="jaeone01")
     }
     else
     {
+        
         alert("로그인 실패");
         WinClose();
- 
     }
     
 }
 else
 {
-    alert("아이디가 틀림");
+    alert("아이디가 틀렸습니다.");
+
+    WinClose();
 }
 
