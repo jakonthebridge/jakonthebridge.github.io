@@ -1,0 +1,24 @@
+function drawingball()
+{
+    //공을 그림 fillstyle이 fill()메소드 안으로 들어가서 작동함
+    ctx.beginPath();
+    ctx.arc(x, y, 10, 0, Math.PI*2);
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+}
+function draw()
+{
+    //10 밀리초 전껄 지우고 시작하는거지 그리고 다시 재 정의 하는 형식이군
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //공그리는 함수 출력
+    drawingball();
+    // 매 프레임마다 x,y코드가 갱신 될 것이다.
+    x += dx;
+    y += dy;
+}
+setInterval(draw, 10); // draw함수가 10 밀리초마다 작동한다.
+</script>
+
+</body>
+</html>

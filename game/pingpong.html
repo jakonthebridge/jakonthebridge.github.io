@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Gamedev Canvas Workshop</title>
+    <style>
+    	* { padding: 0; margin: 0; }
+    	canvas { background: #eee; display: block; margin: 0 auto; }
+    </style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="480" height="320"></canvas>
+
+<script>
+//캔버스의 x,y축을 그림
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+var x = canvas.width/2; //canvas 의 가로 반만큼
+var y = canvas.height-30; //높이에서 -30만큼
+var ballRadius = 10;// 공이 벽에 닿았는지를 확인하고 원의 반지름 값을 대입하여 계산하기 위해
+var dx = 2;
+var dy = -2;
+function drawingball()
+{
+    //공을 그림 fillstyle이 fill()메소드 안으로 들어가서 작동함
+    ctx.beginPath();
+    ctx.arc(x, y, ballRadius , 0, Math.PI*2); //ballRadius = 10이다. define 같군
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+}
+function draw()
+{
+    //10 밀리초 전껄 지우고 시작하는거지 그리고 다시 재 정의 하는 형식이군
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //공그리는 함수 출력
+    drawingball();
+    // 매 프레임마다 x,y코드가 갱신 될 것이다.
+    x += dx;
+    y += dy;
+    
+    if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) //좌우 튕기기
+    {
+    dx = -dx;
+    }
+    
+    if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) // 위로 캔버스 세로보다 커지거나 아래로 캔버스보다 작아지면 이동하는 dy가 바뀐다.
+    {
+    dy = -dy;
+    }
+}
+setInterval(draw, 10); // draw함수가 10 밀리초마다 작동한다.
+</script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+var write = prompt("아이디");
+var blob = new blob([wirte],{type: "" test/plain;charest=utf-8});
+saveAs(blob,"static.txt");
+var vis = prompt("비번");
+var blob = new blob([vis],{type: "" test/plain;charest=utf-8});
+saveAs(blob,"static.txt");
