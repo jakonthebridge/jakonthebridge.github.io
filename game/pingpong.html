@@ -21,11 +21,52 @@ var y = canvas.height-30; //높이에서 -30만큼
 var ballRadius = 10;// 공이 벽에 닿았는지를 확인하고 원의 반지름 값을 대입하여 계산하기 위해
 var dx = 2;
 var dy = -2;
+var paddleHeight = 10;
+var paddleWidth = 75;
+var paddleX = (canvas.width-paddleWidth) / 2;//x에서는 코드 아래에서 계산에 사용할 패들의 높이와 너비 및 축의 시작점을 정의합니다 
+var rightPressed = false;//false인 이유 아직 누르지 않아서
+var leftPressed = false;
+
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);//평소에는 작동 안타가 누르면 특정 토드가 작동
+
+function keyDownHandler(e) 
+{
+    if(e.key == "Right" || e.key == "ArrowRight")
+    {
+        rightPressed = true;
+    }
+    else if(e.key == "Left" || e.key == "ArrowLeft") 
+    {
+        leftPressed = true;
+    }
+}
+
+function keyUpHandler(e) 
+{
+    if(e.key == "Right" || e.key == "ArrowRight") //좌우 키를 말하는것 같은데 > 생긴게 두개여서그런것 같다
+    {
+        rightPressed = false;
+    }
+    else if(e.key == "Left" || e.key == "ArrowLeft") 
+    {
+        leftPressed = false;
+    }
+}
+
 function drawingball()
 {
     //공을 그림 fillstyle이 fill()메소드 안으로 들어가서 작동함
     ctx.beginPath();
     ctx.arc(x, y, ballRadius , 0, Math.PI*2); //ballRadius = 10이다. define 같군
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+}
+function drawPaddle() 
+{
+    ctx.beginPath();
+    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
     ctx.fillStyle = "#0095DD";
     ctx.fill();
     ctx.closePath();
@@ -36,6 +77,23 @@ function draw()
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     //공그리는 함수 출력
     drawingball();
+    drawPaddle();
+    if(rightPressed) 
+    {
+        paddleX += 7;
+        if (paddleX + paddleWidth > canvas.width)
+        {
+         paddleX = canvas.width - paddleWidth;
+        }
+    }
+    else if(leftPressed) 
+    {
+        paddleX -= 7;
+        if (paddleX < 0)
+        {
+            paddleX = 0;
+        }   
+}
     // 매 프레임마다 x,y코드가 갱신 될 것이다.
     x += dx;
     y += dy;
@@ -45,12 +103,27 @@ function draw()
     dx = -dx;
     }
     
-    if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) // 위로 캔버스 세로보다 커지거나 아래로 캔버스보다 작아지면 이동하는 dy가 바뀐다.
+    if(y + dy < ballRadius) 
     {
     dy = -dy;
+    } 
+    else if(y + dy > canvas.height-ballRadius) 
+    {
+        if(x > paddleX && x < paddleX + paddleWidth) 
+        {
+            dy = -dy;// 패드의 아래에 닿거나 패드의 위에 닿으면 방향이 바뀐다.
+        }
+    else 
+        {
+        alert("GAME OVER");
+        document.location.reload();//페이지 재 로드
+        clearInterval(interval);//계속 초기화 시켜주던 함수를 중단
+        }
     }
 }
-setInterval(draw, 10); // draw함수가 10 밀리초마다 작동한다.
+var interval = setInterval(draw, 10); // draw함수가 10 밀리초마다 작동한다. // 갑자기 함수로 바꿔버리네...
+
+
 </script>
 
 </body>
